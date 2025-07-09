@@ -1,8 +1,9 @@
 import React from 'react'
 
-const page = () => {
-  return (
-    <div>page</div>
+const page = async({params}: ParamasWithSearch) => {
+  const {id}=  params;
+    return (
+    <div>USER ID: {id}</div>
   )
 }
 
