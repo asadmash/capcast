@@ -15,7 +15,7 @@ const Page = () => {
       // STEP:4 PASS PROPS TO THE VIDEOCARD COMPONENT
       id='1'
       title='CapCast Message - 01 july 2025'
-      thumbnail='assets/samples/thumbnail (1).png'
+      thumbnail='/assets/samples/thumbnail (1).png'
       createdAt='2025-07-01'
       userImg='assets/images/jason.png'
       username='Jason'
