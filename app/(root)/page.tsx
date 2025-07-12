@@ -12,9 +12,11 @@ const Page = () => {
       {/* <h1 className="text-2xl font-karla">Welcome to loom</h1> */}
 
       {/* STEP:3 RENDER VIDEO CARD COMPONENET */}
-      {dummyCards.map((card) => (
+     <section className='video-grid'>
+       {dummyCards.map((card) => (
       <VideoCard key={card.id} {...card} visibility={card.visibility as Visibility}/>
       ))}
+     </section>
       
     </main>
   )
