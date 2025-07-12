@@ -42,7 +42,14 @@ const VideoCard = ({
                 day: 'numeric'
             })}</h2> */}
         </article>
-
+<button onClick={() => {}} className='copy-btn'>
+<Image src="assets/icons/link.svg" alt='copy' width={18} height={18}/>
+</button>
+{duration && (
+    <div className='duration'>
+{Math.ceil(duration / 60)}min
+    </div>
+)}
     </Link>
   )
 }
