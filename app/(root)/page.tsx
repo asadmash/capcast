@@ -16,8 +16,8 @@ const Page = () => {
       id='1'
       title='CapCast Message - 01 july 2025'
       thumbnail='/assets/samples/thumbnail (1).png'
-      createdAt='2025-07-01'
-      userImg='assets/images/jason.png'
+      createdAt= {new Date('2025-07-01')}
+      userImg='/assets/images/jason.png'
       username='Jason'
       views={10}
       visibility='public'
