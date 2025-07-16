@@ -1,0 +1,6 @@
+{
+  "databaseURL": "https://devmaspro-s-workspace-2n98nv.eu-central-1.xata.sh/db/capcast_app",
+  "codegen": {
+    "output": "src/xata.ts"
+  }
+}

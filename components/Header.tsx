@@ -25,8 +25,8 @@ const Header = ({subHeader, title, userImg}: SharedHeaderProps) => {
         <span>Upload a video</span>
             </Link>
             <div className="record">
-              <button className='primary-btn'>
-                <Image src={ICONS.record} alt="record" width={16} height={16}></Image>
+              <button className='primary-btn bg-[rgb(0,255,255)]'>
+                <Image src={ICONS.record} alt="record" width={16} height={16} ></Image>
                 <span>Record a video</span>
               </button>
             </div>
