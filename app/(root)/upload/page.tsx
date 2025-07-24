@@ -7,13 +7,14 @@ const Page = () => {
   // State to manage form data
   const [formData, setFormData] = useState({
     title: "",
-    desscription: "",
-    visbility: "public",
+    description: "",
+    visibility: "public",
   });
 
   // an object to store the videos
   const video = {};
   // an object to store the thumbnails
+  const thumbnail = {};
 
   const [error, setError] = useState(null); //state declaration for error handleing
 
@@ -43,7 +44,7 @@ const Page = () => {
         id="Description"
         label="Description"
         placeholder="Describe what this video is about"
-        value={formData.desscription}
+        value={formData.description}
         as="textarea"
         onChange={handleInputChange} //on change event listener
       />
@@ -76,7 +77,7 @@ const Page = () => {
       <FormField
         id="visibility"
         label="Visibility"
-        value={formData.visbility}
+        value={formData.visibility}
         as="select"
         options={[
           { value: "public", label: "Public" },
