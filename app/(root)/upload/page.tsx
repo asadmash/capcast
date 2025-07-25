@@ -37,7 +37,10 @@ const Page = () => {
       {/* when error become true this div will be show with the error message */}
       {error && <div className="erro-field">{error}</div>}
       {/* a form to take user input */}
-      <form className="rounded-20 shadow-10 gap-6 w-full flex flex-col px-5 py-7.5">
+      <form
+        className="rounded-20 shadow-10 gap-6 w-full flex flex-col px-5 py-7.5"
+        onSubmit={handleSubmit}
+      >
         <FormField
           id="title"
           label="Title"
