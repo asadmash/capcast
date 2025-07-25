@@ -21,7 +21,7 @@ const Page = () => {
   const [error, setError] = useState(null); //state declaration for error handleing
 
   // a function to handle input change
-  const handleInputChange = (e: ChangeEvent) => {
+  const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target; //extract the name and value from the target
 
     // set the name value data to the formData
@@ -43,7 +43,7 @@ const Page = () => {
         onChange={handleInputChange} //on change event listener
       />
       <FormField
-        id="Description"
+        id="description"
         label="Description"
         placeholder="Describe what this video is about"
         value={formData.description}
