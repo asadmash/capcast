@@ -92,7 +92,7 @@ const Page = () => {
         />
 
         {/* submit button  */}
-        <button type="submit" disabled={isSubmitting}>
+        <button type="submit" disabled={isSubmitting} className="submit-button">
           {isSubmitting ? "Uploading..." : "Upload video"}
         </button>
       </form>
