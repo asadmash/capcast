@@ -3,6 +3,7 @@ import FileInput from "@/components/FileInput"; //
 import FormField from "@/components/FormField";
 import { MAX_THUMBNAIL_SIZE, MAX_VIDEO_SIZE } from "@/constants";
 import { useFileInput } from "@/lib/hooks/useFileInput";
+import { log } from "console";
 import React, { ChangeEvent, useState } from "react";
 
 const Page = () => {
@@ -21,7 +22,7 @@ const Page = () => {
   // an object to store the thumbnails
   const thumbnail = useFileInput(MAX_THUMBNAIL_SIZE);
 
-  const [error, setError] = useState(null); //state declaration for error handleing
+  const [error, setError] = useState(""); //state declaration for error handleing
 
   // a function to handle input change
   const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
@@ -29,6 +30,30 @@ const Page = () => {
 
     // set the name value data to the formData
     setFormData((prevState) => ({ ...prevState, [name]: value }));
+  };
+
+  // handle submit function
+  const handleSubmit = async (e: FormEvent) => {
+    e.preventDefault();
+
+    setIsSubmitting(true);
+
+    try {
+      if (!video.file || !thumbnail.file) {
+        setError("Please upload video and thumbnail.");
+        return;
+      }
+      if (!formData.title || !formData.description) {
+        setError("Please fill in all the details.");
+        return;
+      }
+
+      //Upload the video to bunny
+    } catch (error) {
+      console.log("Error submitting form:", error);
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
