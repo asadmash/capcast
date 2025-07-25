@@ -6,6 +6,9 @@ import { useFileInput } from "@/lib/hooks/useFileInput";
 import React, { ChangeEvent, useState } from "react";
 
 const Page = () => {
+  // state to handle submit button
+  const [isSubmitting, setIsSubmitting] = useState(false);
+
   // State to manage form data
   const [formData, setFormData] = useState({
     title: "",
@@ -34,59 +37,65 @@ const Page = () => {
       {/* when error become true this div will be show with the error message */}
       {error && <div className="erro-field">{error}</div>}
       {/* a form to take user input */}
-      <form className="rounded-20 shadow-10 gap-6 w-full flex flex-col px-5 py-7.5"></form>
-      <FormField
-        id="title"
-        label="Title"
-        placeholder="Enter a clear and concise video title"
-        value={formData.title}
-        onChange={handleInputChange} //on change event listener
-      />
-      <FormField
-        id="description"
-        label="Description"
-        placeholder="Describe what this video is about"
-        value={formData.description}
-        as="textarea"
-        onChange={handleInputChange} //on change event listener
-      />
-      {/* file input element to render file upload componenet */}
-      <FileInput
-        id="video"
-        label="video"
-        accept="video/*"
-        file={video.file}
-        previewUrl={video.previewUrl}
-        inputRef={video.inputRef}
-        onChange={video.handleFileChange}
-        onReset={video.resetFile}
-        type="video"
-      />
+      <form className="rounded-20 shadow-10 gap-6 w-full flex flex-col px-5 py-7.5">
+        <FormField
+          id="title"
+          label="Title"
+          placeholder="Enter a clear and concise video title"
+          value={formData.title}
+          onChange={handleInputChange} //on change event listener
+        />
+        <FormField
+          id="description"
+          label="Description"
+          placeholder="Describe what this video is about"
+          value={formData.description}
+          as="textarea"
+          onChange={handleInputChange} //on change event listener
+        />
+        {/* file input element to render file upload componenet */}
+        <FileInput
+          id="video"
+          label="video"
+          accept="video/*"
+          file={video.file}
+          previewUrl={video.previewUrl}
+          inputRef={video.inputRef}
+          onChange={video.handleFileChange}
+          onReset={video.resetFile}
+          type="video"
+        />
 
-      {/* input element to render thumbnail upload component */}
-      <FileInput
-        id="thumbnail"
-        label="Thumbnail"
-        accept="image/*"
-        file={thumbnail.file}
-        previewUrl={thumbnail.previewUrl}
-        inputRef={thumbnail.inputRef}
-        onChange={thumbnail.handleFileChange}
-        onReset={thumbnail.resetFile}
-        type="image"
-      />
+        {/* input element to render thumbnail upload component */}
+        <FileInput
+          id="thumbnail"
+          label="Thumbnail"
+          accept="image/*"
+          file={thumbnail.file}
+          previewUrl={thumbnail.previewUrl}
+          inputRef={thumbnail.inputRef}
+          onChange={thumbnail.handleFileChange}
+          onReset={thumbnail.resetFile}
+          type="image"
+        />
 
-      <FormField
-        id="visibility"
-        label="Visibility"
-        value={formData.visibility}
-        as="select"
-        options={[
-          { value: "public", label: "Public" },
-          { value: "private", label: "Private" },
-        ]}
-        onChange={handleInputChange} //on change event listener
-      />
+        <FormField
+          id="visibility"
+          label="Visibility"
+          value={formData.visibility}
+          as="select"
+          options={[
+            { value: "public", label: "Public" },
+            { value: "private", label: "Private" },
+          ]}
+          onChange={handleInputChange} //on change event listener
+        />
+
+        {/* submit button  */}
+        <button type="submit" disabled={isSubmitting}>
+          {isSubmitting ? "Uploading..." : "Upload video"}
+        </button>
+      </form>
     </div>
   );
 };
