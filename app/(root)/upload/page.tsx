@@ -1,6 +1,8 @@
 "use client"; //make the entire component client site because we are using useState
 import FileInput from "@/components/FileInput"; //
 import FormField from "@/components/FormField";
+import { MAX_THUMBNAIL_SIZE, MAX_VIDEO_SIZE } from "@/constants";
+import { useFileInput } from "@/lib/hooks/useFileInput";
 import React, { ChangeEvent, useState } from "react";
 
 const Page = () => {
@@ -12,9 +14,9 @@ const Page = () => {
   });
 
   // an object to store the videos
-  const video = {};
+  const video = useFileInput(MAX_VIDEO_SIZE);
   // an object to store the thumbnails
-  const thumbnail = {};
+  const thumbnail = useFileInput(MAX_THUMBNAIL_SIZE);
 
   const [error, setError] = useState(null); //state declaration for error handleing
 

@@ -47,6 +47,9 @@ export const useFileInput = (maxSize: number) => {
     setPreviewUrl("");
     setDuration(0);
 
-    if (inputRef.current) inputRef.current, (value = "");
+    if (inputRef.current) inputRef.current.value = "";
   };
+
+  //return everything from this hook
+  return { file, previewUrl, duration, inputRef, handleFileChange, resetFile };
 };
