@@ -7,6 +7,21 @@ import { useFileInput } from "@/lib/hooks/useFileInput";
 import { log } from "console";
 import React, { ChangeEvent, FormEvent, useState } from "react";
 
+const uploadFileToBunny =  (file: File, uploadUrl: string, accessKey:string): Promise<void> => {
+return fetch(uploadUrl, {
+  method: 'PUT',
+  headers: {
+    'Content-Type': file.type,
+    AccessKey: accessKey,
+  },
+  body: file,
+
+}).then((response) => {
+  if(!response.ok) throw new Error('Upload failed')
+})
+}
+
+
 const Page = () => {
   // state to handle submit button
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -59,6 +74,10 @@ const Page = () => {
       // error handleing
       if (!videoUploadUrl || !videoAccessKey)
         throw new Error("Failed to get video upload credentials");
+
+      //Upload the video to bunny
+    
+
     } catch (error) {
       console.log("Error submitting form:", error);
     } finally {
