@@ -5,7 +5,7 @@ import { MAX_THUMBNAIL_SIZE, MAX_VIDEO_SIZE } from "@/constants"; // Size limits
 import { getThumbnailUploadUrl, getVideoUploadUrl, saveVideoDetails } from "@/lib/actions/video"; // Server action to get video upload URL and access key
 import { useFileInput } from "@/lib/hooks/useFileInput"; // Custom hook to manage file input state
 import { log } from "console";
-import React, { ChangeEvent, FormEvent, useState } from "react";
+import React, { ChangeEvent, FormEvent, useEffect, useState } from "react";
 
 // Function to upload a file to Bunny.net using a pre-signed URL and access key
 const uploadFileToBunny = (
@@ -44,6 +44,13 @@ const Page = () => {
   const video = useFileInput(MAX_VIDEO_SIZE);
   // State and handlers for thumbnail file input
   const thumbnail = useFileInput(MAX_THUMBNAIL_SIZE);
+
+  // video duration edge case check
+  useEffect(() => {
+if(video.duration !== null || 0){
+  setVideoDuration(video.duration)
+}
+  }, [video.duration])
 
   // State for error messages
   const [error, setError] = useState("");
