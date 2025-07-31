@@ -8,6 +8,8 @@ import { BUNNY } from "@/constants";
 import { db } from "@/drizzle/db";
 import { videos } from "@/drizzle/schema";
 import { revalidatePath } from "next/cache";
+import { fixedWindow } from "@arcjet/next";
+import aj from "../arcjet";
 
 // all keys from constants and env
 const VIDEO_STREAM_BASE_URL = BUNNY.STREAM_BASE_URL;
@@ -33,6 +35,25 @@ const revalidatePaths = (path: string[]) => {
 path.forEach((path) => revalidatePath(path))
 }
 
+
+// arcjet rate limit
+const validateWithArcjet = async(fingerprint: string) => {
+    const rateLimit = aj.withRule(
+        fixedWindow({
+            mode: 'LIVE',
+            window: '1m',
+            max: 2,
+            characteristics: ['fingerprint']
+        })
+    )
+
+    const req = await request();
+    const decition = await rateLimit.protect(req, {fingerprint})
+
+    if(decition.isDenied()){
+        throw new Error('Rate Limit Exceeded')
+    }
+}
 
 
 //Server actions
@@ -76,6 +97,8 @@ export const getThumbnailUploadUrl = withErrorHandling(
 
 export const saveVideoDetails = withErrorHandling(async (videoDetails: VideoDetails) => {
 const userId = await getSessionUserId();
+
+
 
 await apiFetch(
     `${VIDEO_STREAM_BASE_URL}/${BUNNY_LIBRARY_ID}/videos/${videoDetails.videoId}`,
