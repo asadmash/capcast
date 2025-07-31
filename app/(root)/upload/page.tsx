@@ -5,6 +5,7 @@ import { MAX_THUMBNAIL_SIZE, MAX_VIDEO_SIZE } from "@/constants"; // Size limits
 import { getThumbnailUploadUrl, getVideoUploadUrl, saveVideoDetails } from "@/lib/actions/video"; // Server action to get video upload URL and access key
 import { useFileInput } from "@/lib/hooks/useFileInput"; // Custom hook to manage file input state
 import { log } from "console";
+import { useRouter } from "next/navigation";
 import React, { ChangeEvent, FormEvent, useEffect, useState } from "react";
 
 // Function to upload a file to Bunny.net using a pre-signed URL and access key
@@ -27,6 +28,8 @@ const uploadFileToBunny = (
 
 // Main upload page component
 const Page = () => {
+  // router hook
+  const router = useRouter();
   // State to handle submit button loading
   const [isSubmitting, setIsSubmitting] = useState(false);
 
@@ -113,6 +116,9 @@ if(video.duration !== null || 0){
         ...formData,
         duration: videoDuration,
       })
+
+      // push the video
+      router.push(`/video/${videoId}`)
 
     } catch (error) {
       console.log("Error submitting form:", error);
