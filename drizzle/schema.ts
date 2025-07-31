@@ -1,4 +1,4 @@
-import { uuid } from "drizzle-orm/gel-core";
+import { uuid } from "drizzle-orm/pg-core";
 import { pgTable, text, timestamp, boolean, integer } from "drizzle-orm/pg-core";
 
 export const user = pgTable("user", {
