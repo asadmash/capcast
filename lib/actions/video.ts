@@ -7,6 +7,7 @@ import { apiFetch, getEnv, withErrorHandling } from "../utils";
 import { BUNNY } from "@/constants";
 import { db } from "@/drizzle/db";
 import { videos } from "@/drizzle/schema";
+import { revalidatePath } from "next/cache";
 
 // all keys from constants and env
 const VIDEO_STREAM_BASE_URL = BUNNY.STREAM_BASE_URL;
@@ -27,6 +28,12 @@ const getSessionUserId = async ():Promise<string> => {
     // if there is a session
     return session.user.id;
 }
+
+const revalidatePaths = (path: string[]) => {
+path.forEach((path) => revalidatePath(path))
+}
+
+
 
 //Server actions
 
@@ -89,4 +96,6 @@ await db.insert(videos).values({
     createdAt: new Date(),
     updatedAt: new Date()
 });
+
+revalidatePaths(['/'])
 })
