@@ -97,5 +97,7 @@ await db.insert(videos).values({
     updatedAt: new Date()
 });
 
-revalidatePaths(['/'])
+revalidatePaths(['/']);
+
+return {videoId:  videoDetails.videoId}
 })
