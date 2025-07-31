@@ -3,7 +3,7 @@
 
 import { headers } from "next/headers";
 import { auth } from "../auth";
-import { getEnv, withErrorHandling } from "../utils";
+import { apiFetch, getEnv, withErrorHandling } from "../utils";
 import { BUNNY } from "@/constants";
 
 // all keys from constants and env
@@ -32,4 +32,35 @@ export const getVideoUploadUrl = withErrorHandling(async () => {
 await getSessionUserId();
 
 // set the base url of the stream
+const videoResponse = await apiFetch(
+    `${VIDEO_STREAM_BASE_URL}/${BUNNY_LIBRARY_ID}/videos`,
+    {
+        method: 'POST',
+        bunnyType: 'stream',
+        body: {title: 'Temporary Title', collectionId: ''}
+    }
+)
+
+// upload url
+const uploadUrl =`${VIDEO_STREAM_BASE_URL}/${BUNNY_LIBRARY_ID}/videos/${videoResponse.guid}`;
+
+return{
+    videoId: videoResponse.guid,
+    uploadUrl,
+    accessKey: ACCESS_KEYS.streamAccessKey
+}
 })
+
+export const getThumbnailUploadUrl = withErrorHandling(
+    async (videoId: string) => {
+        const fileName = `${Date.now()}-${videoId}-thumbnail}`;
+        const uploadUrl = `${THUMBNAIL_STORAGE_BASE_URL}/thumbnails/${fileName}`;
+        const cdnUrl = `${THUMBNAIL_CDN_URL}/thumbnails/${fileName}`;
+
+        return{
+            uploadUrl,
+            cdnUrl,
+            accessKey: ACCESS_KEYS.storageAccessKey
+        }
+    }
+);
