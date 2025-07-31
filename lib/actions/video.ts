@@ -30,4 +30,6 @@ const getSessionUserId = async ():Promise<string> => {
 
 export const getVideoUploadUrl = withErrorHandling(async () => {
 await getSessionUserId();
+
+// set the base url of the stream
 })
