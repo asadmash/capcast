@@ -5,6 +5,7 @@ import { headers } from "next/headers";
 import { auth } from "../auth";
 import { apiFetch, getEnv, withErrorHandling } from "../utils";
 import { BUNNY } from "@/constants";
+import { db } from "@/drizzle/db";
 
 // all keys from constants and env
 const VIDEO_STREAM_BASE_URL = BUNNY.STREAM_BASE_URL;
@@ -79,4 +80,6 @@ await apiFetch(
         }
     }
 )
+
+await db.insert(videos).values({});
 })
