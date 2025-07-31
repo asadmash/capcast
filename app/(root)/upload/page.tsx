@@ -30,6 +30,9 @@ const Page = () => {
   // State to handle submit button loading
   const [isSubmitting, setIsSubmitting] = useState(false);
 
+  // State to handle video duration
+  const [videoDuration, setVideoDuration] = useState(0);
+
   // State to manage form data for video details
   const [formData, setFormData] = useState({
     title: "",
