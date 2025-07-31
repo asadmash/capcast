@@ -2,9 +2,10 @@
 import FileInput from "@/components/FileInput"; //
 import FormField from "@/components/FormField";
 import { MAX_THUMBNAIL_SIZE, MAX_VIDEO_SIZE } from "@/constants";
+import { getVideoUploadUrl } from "@/lib/actions/video";
 import { useFileInput } from "@/lib/hooks/useFileInput";
 import { log } from "console";
-import React, { ChangeEvent, useState } from "react";
+import React, { ChangeEvent, FormEvent, useState } from "react";
 
 const Page = () => {
   // state to handle submit button
@@ -48,7 +49,16 @@ const Page = () => {
         return;
       }
 
-      //Upload the video to bunny
+      // get upload url
+      const {
+        videoId,
+        uploadUrl: videoUploadUrl,
+        accessKey: videoAccessKey,
+      } = await getVideoUploadUrl();
+
+      // error handleing
+      if (!videoUploadUrl || !videoAccessKey)
+        throw new Error("Failed to get video upload credentials");
     } catch (error) {
       console.log("Error submitting form:", error);
     } finally {
