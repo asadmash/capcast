@@ -64,3 +64,7 @@ export const getThumbnailUploadUrl = withErrorHandling(
         }
     }
 );
+
+export const saveVideoDetails = withErrorHandling(async (videoDetails: VideoDetails) => {
+
+})
