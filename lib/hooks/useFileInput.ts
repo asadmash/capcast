@@ -1,4 +1,4 @@
-import { useRef, useState } from "react";
+import { ChangeEvent, useRef, useState } from "react";
 
 export const useFileInput = (maxSize: number) => {
   const [file, setFile] = useState<File | null>(null);
@@ -21,7 +21,7 @@ export const useFileInput = (maxSize: number) => {
 
       setPreviewUrl(objectURL);
 
-      if (selectedFile.type.startWith("video")) {
+      if (selectedFile.type.startsWith("video")) {
         const video = document.createElement("video");
 
         video.preload = "metadata";
@@ -43,7 +43,7 @@ export const useFileInput = (maxSize: number) => {
   const resetFile = () => {
     if (previewUrl) URL.revokeObjectURL(previewUrl);
 
-    setFile(value);
+    setFile(null);
     setPreviewUrl("");
     setDuration(0);
 
