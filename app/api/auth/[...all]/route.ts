@@ -9,3 +9,13 @@ export const {GET, POST} = toNextJsHandler(auth.handler)
 const emailValidation = aj.withRule(
     validateEmail({mode: 'LIVE', block: ['DISPOSABLE', 'INVALID', 'NO_MX_RECORDS']})
 )
+
+// Rate Limit
+const rateLimit = aj.withRule(
+    slidingWindow({
+        mode: 'LIVE',
+        interval: '2m',
+        max: 2,
+        characteristics: ['fingerprint']
+    })
+)
