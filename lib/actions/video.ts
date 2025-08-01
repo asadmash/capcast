@@ -8,7 +8,7 @@ import { BUNNY } from "@/constants";
 import { db } from "@/drizzle/db";
 import { videos } from "@/drizzle/schema";
 import { revalidatePath } from "next/cache";
-import { fixedWindow } from "@arcjet/next";
+import { fixedWindow, request } from "@arcjet/next";
 import aj from "../arcjet";
 
 // all keys from constants and env
